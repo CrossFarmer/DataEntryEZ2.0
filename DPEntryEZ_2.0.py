@@ -729,10 +729,17 @@ class DataEntryApp:
         # Save the Excel file
         wb.save(self.excel_file)
 
-
-
-
+def check_feature_availability():
+    disable_date = datetime(2024, 4, 1)
+    if datetime.now() >= disable_date:
+        return False 
+    return True
+    
 if __name__ == "__main__":
     root = tk.Tk()
-    app = DataEntryApp(root)
-    root.mainloop()
+    if check_feature_availability():
+        app = DataEntryApp(root)
+        root.mainloop()
+    else:
+        print("Your Trial Period Has Ended. Please Contact Author For Continuing Use.")
+        input("Press Enter To Close Window")
